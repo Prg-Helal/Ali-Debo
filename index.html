@@ -15,7 +15,9 @@
             --primary: rgb(244, 80, 24);
             --primary-light: rgba(244, 80, 24, 0.1);
             --primary-dark: #d14916;
+            --primary-transparent: rgba(244, 80, 24, 0.8);
             --dark: #1a1a1a;
+            --darker: #111;
             --light: #ffffff;
             --gray: #f5f5f5;
             --dark-gray: #333;
@@ -25,8 +27,11 @@
             --card-bg: #f9f9f9;
             --shadow: rgba(0, 0, 0, 0.1);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-fast: all 0.2s ease;
             --radius: 12px;
+            --radius-lg: 20px;
             --header-height: 80px;
+            --section-padding: 120px;
         }
 
         .dark-mode {
@@ -44,6 +49,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--background);
@@ -52,7 +61,25 @@
             transition: var(--transition);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: var(--header-height);
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
 
         .container {
@@ -63,16 +90,17 @@
         }
 
         section {
-            padding: 100px 0;
+            padding: var(--section-padding) 0;
             position: relative;
         }
 
         .section-title {
-            font-size: 2.4rem;
-            font-weight: 700;
+            font-size: 2.8rem;
+            font-weight: 800;
             margin-bottom: 40px;
             position: relative;
             display: inline-block;
+            line-height: 1.2;
         }
 
         .section-title::after {
@@ -108,7 +136,7 @@
 
         .btn {
             display: inline-block;
-            padding: 14px 35px;
+            padding: 16px 40px;
             background-color: var(--primary);
             color: #fff;
             border: none;
@@ -147,15 +175,25 @@
             background: var(--primary-dark);
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
         /* Enhanced Header & Navigation */
         .top-bar {
             background-color: var(--dark);
             color: #fff;
             padding: 8px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            margin-bottom: 0;
+            position: relative;
             z-index: 1001;
         }
 
@@ -170,19 +208,75 @@
 
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            padding: 2px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .social-links a {
-            color: #fff;
-            opacity: 0.7;
-            transition: var(--transition);
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            text-decoration: none;
+        }
+
+        /* Subtle glow effect */
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .social-links a:hover {
+            color: white;
             opacity: 1;
-            transform: translateY(-2px);
+        }
+
+        .social-links a:hover::after {
+            opacity: 0.4;
+        }
+
+        /* Platform-specific soft colors */
+        .social-links a.facebook:hover {
+            color: #9ab8ff;
+        }
+
+        .social-links a.twitter:hover {
+            color: #8accff;
+        }
+
+        .social-links a.instagram:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-links a.linkedin:hover {
+            color: #82c8ff;
+        }
+
+        .social-links a.youtube:hover {
+            color: #ff9d9d;
+        }
+
+        .social-links a.github:hover {
+            color: #d2d2d2;
         }
 
         .top-actions {
@@ -191,104 +285,74 @@
             gap: 20px;
         }
 
+        /* Theme Toggle Switch */
         .theme-toggle {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 5px;
-            cursor: pointer;
+            position: relative;
+            display: inline-block;
             width: 60px;
             height: 30px;
-            position: relative;
-            transition: var(--transition);
         }
 
-        .toggle-icon {
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
             position: absolute;
-            margin: 2.3px;
-            font-size: 1rem;
-            transition: var(--transition);
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
         }
 
-        .sun-icon {
-            left: 5px;
-            color: #FFD700;
-            /* لون الشمس */
-            opacity: 1;
-        }
-
-        .moon-icon {
-            right: 5px;
-            color: #f0f0f0;
-            /* لون القمر */
-            opacity: 0;
-            margin: 4px;
-
-        }
-
-        .dark-mode .sun-icon {
-            opacity: 0;
-        }
-
-        .dark-mode .moon-icon {
-            opacity: 1;
-        }
-
-        .toggle-ball {
-            width: 25px;
-            height: 25px;
-            background: var(--primary);
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
             border-radius: 50%;
-            position: absolute;
-            left: 3px;
-            transition: transform 0.4s ease;
-            z-index: -1;
         }
 
-        .dark-mode .toggle-ball {
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
             transform: translateX(30px);
         }
 
-        /* تعديلات للوضع المظلم */
-        .dark-mode .theme-toggle {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-
-        .language-switch {
-            position: relative;
-            display: inline-block;
-        }
-
-        .language-switch button {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
+        .toggle-icons {
+            position: absolute;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            color: #fff;
-            font-size: 0.9rem;
+            width: 100%;
+            height: 100%;
+            padding: 0 8px;
+            pointer-events: none;
         }
 
-        .language-switch button:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .toggle-icons i {
+            color: white;
+            font-size: 0.8rem;
         }
 
         /* Enhanced Header */
         header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            position: fixed;
-            top: 40px;
-            left: 0;
-            right: 0;
+            position: sticky;
+            top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             padding: 0;
@@ -303,11 +367,12 @@
         }
 
         .dark-mode .top-bar {
-            background-color: #111;
+            background-color: var(--darker);
         }
 
         .scrolled {
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            height: 70px;
         }
 
         .header-content {
@@ -366,7 +431,7 @@
         }
 
         .nav-links li {
-            margin-left: 20px;
+            margin-left: 25px;
         }
 
         .nav-links a {
@@ -377,6 +442,9 @@
             transition: var(--transition);
             padding: 8px 0;
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-links a::after {
@@ -402,10 +470,11 @@
         .header-actions {
             display: flex;
             align-items: center;
+            gap: 20px;
         }
 
         .header-btn {
-            padding: 8px 30px;
+            padding: 10px 30px;
             background: var(--primary);
             color: white;
             border: none;
@@ -427,35 +496,79 @@
             box-shadow: 0 5px 15px rgba(244, 80, 24, 0.3);
         }
 
+        /* Enhanced Mobile Toggle */
         .mobile-toggle {
             display: none;
-            font-size: 1.8rem;
             cursor: pointer;
-            color: var(--text);
             transition: var(--transition);
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
+            background: var(--primary-light);
             justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1002;
         }
 
         .mobile-toggle:hover {
             transform: translateY(-2px);
-            color: var(--primary);
+            background: var(--primary-transparent);
         }
 
         .mobile-toggle:active {
             transform: translateY(-1px);
-            color: var(--primary);
         }
 
+        .mobile-toggle .hamburger {
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .mobile-toggle .hamburger::before,
+        .mobile-toggle .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition-fast);
+        }
+
+        .mobile-toggle .hamburger::before {
+            top: -8px;
+            right: 0;
+        }
+
+        .mobile-toggle .hamburger::after {
+            top: 8px;
+            right: 0;
+        }
+
+        /* Active state (X shape) */
+        .mobile-toggle.active .hamburger {
+            background: transparent;
+        }
+
+        .mobile-toggle.active .hamburger::before {
+            transform: rotate(45deg);
+            top: 0;
+            background: var(--primary);
+        }
+
+        .mobile-toggle.active .hamburger::after {
+            transform: rotate(-45deg);
+            top: 0;
+            background: var(--primary);
+        }
 
         /* Sidebar Styles */
         .sidebar {
             position: fixed;
-            top: 40px;
+            top: 45px;
             right: -320px;
             width: 300px;
             height: calc(100vh - 40px);
@@ -463,8 +576,10 @@
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
             z-index: 2000;
             transition: var(--transition);
-            padding: 20px;
+            padding: 40px 20px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar.open {
@@ -491,6 +606,7 @@
             padding: 12px 15px;
             border-radius: 8px;
             transition: var(--transition);
+            font-size: 1.2rem;
         }
 
         .sidebar .nav-links a:hover {
@@ -501,13 +617,17 @@
             width: 100%;
             justify-content: center;
             margin-top: 30px;
+            padding: 12px;
         }
 
         .sidebar-actions {
+            height: 80%;
+            margin: auto;
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            align-items: center;
         }
 
         .overlay {
@@ -519,57 +639,11 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 1999;
             display: none;
+            backdrop-filter: blur(5px);
         }
 
         .overlay.active {
             display: block;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .nav-links li {
-                margin-left: 15px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .header-actions {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .nav-links {
-                display: none;
-            }
-
-            .header-actions {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .top-bar-content {
-                justify-content: center;
-            }
-
-            .social-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .top-bar-content {
-                justify-content: flex-end;
-            }
         }
 
         /* Hero Section */
@@ -581,24 +655,22 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
-            background-color: var(--bg-light);
+            background-color: var(--background);
+            padding-top: calc(var(--header-height) + 20px);
         }
 
-        .grid-lines {
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 200%;
-            height: 200%;
-            background-image:
-                linear-gradient(to right, rgba(244, 80, 24, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(244, 80, 24, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: moveGrid 40s linear infinite;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 80, 24, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
             z-index: 0;
         }
 
-        .dark-mode .hero {
+        .dark-mode .hero::before {
             background: linear-gradient(135deg, rgba(244, 80, 24, 0.05) 0%, rgba(26, 26, 26, 0) 100%);
         }
 
@@ -606,19 +678,21 @@
             display: flex;
             align-items: center;
             gap: 60px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-text {
             flex: 1;
             z-index: 2;
+            text-align: right;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
             margin-bottom: 25px;
             line-height: 1.2;
-            
         }
 
         .hero h1 span {
@@ -646,7 +720,7 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 35px;
             color: var(--text-light);
             max-width: 600px;
@@ -657,53 +731,77 @@
             display: flex;
             justify-content: center;
             position: relative;
+            perspective: 1000px;
         }
 
-        .hero-image::before {
+        .hero-image-container {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-image-container img {
+            max-width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(244, 80, 24, 0.1);
+            transform: translateZ(20px);
+        }
+
+        .hero-image-container::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border: 3px solid var(--primary);
-            border-radius: var(--radius);
-            animation: rotateBorder 20s linear infinite;
+            border-radius: var(--radius-lg);
+            background: var(--primary-light);
+            transform: translateZ(-20px);
             z-index: -1;
             opacity: 0.7;
         }
 
-        @keyframes rotateBorder {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            animation: float 8s ease-in-out infinite;
-            transform: translateY(0);
-            border: 1px solid rgba(244, 80, 24, 0.1);
-        }
-
         @keyframes float {
             0% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotateY(0deg);
             }
 
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-15px) rotateY(5deg);
             }
 
             100% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotateY(0deg);
+            }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
             }
         }
 
@@ -729,7 +827,7 @@
 
         .why-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 35px;
             margin-top: 50px;
             position: relative;
@@ -738,8 +836,8 @@
 
         .why-card {
             background: var(--card-bg);
-            padding: 35px;
-            border-radius: var(--radius);
+            padding: 40px;
+            border-radius: var(--radius-lg);
             box-shadow: 0 10px 30px var(--shadow);
             transition: var(--transition);
             position: relative;
@@ -772,16 +870,16 @@
         }
 
         .why-card h3 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
             color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .why-card h3 i {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .why-card ul {
@@ -797,6 +895,7 @@
             gap: 10px;
             position: relative;
             padding-right: 25px;
+            font-size: 1.1rem;
         }
 
         .why-card li::before {
@@ -840,7 +939,7 @@
         .benefit-card {
             background: var(--card-bg);
             padding: 40px 30px;
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             box-shadow: 0 10px 30px var(--shadow);
             transition: var(--transition);
             position: relative;
@@ -859,7 +958,7 @@
         }
 
         .benefit-card h3 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
             color: var(--primary);
         }
@@ -868,6 +967,7 @@
             margin-bottom: 20px;
             color: var(--text-light);
             flex-grow: 1;
+            font-size: 1.1rem;
         }
 
         .benefit-icon {
@@ -890,6 +990,16 @@
             transform: scale(1.1);
         }
 
+        .benefit-tag {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
         .deadline {
             background: var(--primary);
             color: white;
@@ -902,7 +1012,7 @@
             margin: 40px auto 0;
             position: relative;
             z-index: 1;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         @keyframes pulse {
@@ -917,6 +1027,58 @@
             100% {
                 box-shadow: 0 0 0 0 rgba(244, 80, 24, 0);
             }
+        }
+
+        /* Enhanced Who Section */
+        .who {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff9c6e 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .who::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .who-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(9.3px);
+            -webkit-backdrop-filter: blur(9.3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .who .section-title {
+            color: white;
+        }
+
+        .who .section-title::after {
+            background: white;
+        }
+
+        .who p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 5px;
         }
 
         /* Enhanced Form Section */
@@ -944,7 +1106,7 @@
             margin: 0 auto;
             background: var(--card-bg);
             padding: 50px;
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             box-shadow: 0 15px 40px var(--shadow);
             position: relative;
             z-index: 1;
@@ -964,6 +1126,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.1rem;
         }
 
         .form-group input,
@@ -1034,6 +1197,11 @@
         .form-footer a {
             color: var(--primary);
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
         }
 
         /* Ad Banners */
@@ -1094,39 +1262,11 @@
             transform: scale(1.02);
         }
 
-        /* Conclusion Section */
-        .conclusion {
-            text-align: center;
-            position: relative;
-        }
-
-        .conclusion::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(244, 80, 24, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: 0;
-            animation: pulse 16s infinite;
-        }
-
-        .conclusion p {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
-            position: relative;
-            z-index: 1;
-        }
-
         /* Footer */
         footer {
             background: var(--dark);
             color: #fff;
-            padding: 60px 0 20px;
+            padding: 80px 0 30px;
             position: relative;
             overflow: hidden;
         }
@@ -1150,6 +1290,7 @@
             margin-bottom: 40px;
             position: relative;
             z-index: 1;
+            gap: 40px;
         }
 
         .footer-logo {
@@ -1161,6 +1302,7 @@
         .footer-logo .logo {
             font-size: 2.5rem;
             margin-bottom: 20px;
+            color: white;
         }
 
         .footer-logo p {
@@ -1180,6 +1322,7 @@
             font-size: 1.5rem;
             margin-bottom: 25px;
             position: relative;
+            color: white;
         }
 
         .footer-links h3::after {
@@ -1199,6 +1342,9 @@
 
         .footer-links li {
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .footer-links a {
@@ -1214,6 +1360,11 @@
             padding-right: 10px;
         }
 
+        .footer-links i {
+            width: 20px;
+            text-align: center;
+        }
+
         .copyright {
             text-align: center;
             padding-top: 30px;
@@ -1224,16 +1375,56 @@
             z-index: 1;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .hero h1 {
                 font-size: 3.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
             }
         }
 
         @media (max-width: 992px) {
             .hero-content {
                 flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
                 text-align: center;
             }
 
@@ -1249,39 +1440,24 @@
                 font-size: 2.8rem;
             }
 
-            .hero-image::before {
+            .header-nav-links {
                 display: none;
+            }
+
+            .header-actions {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .section-padding {
+                padding: 80px 0;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: var(--header-height);
-                right: 0;
-                left: 0;
-                background: var(--background);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px var(--shadow);
-                border-radius: 0 0 var(--radius) var(--radius);
-                z-index: 1000;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-                text-align: center;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-
             .section-title {
                 font-size: 2rem;
             }
@@ -1290,8 +1466,8 @@
                 font-size: 2.4rem;
             }
 
-            section {
-                padding: 80px 0;
+            .hero p {
+                font-size: 1.2rem;
             }
 
             .form-container {
@@ -1313,6 +1489,11 @@
 
             .header-content {
                 padding: 0 15px;
+            }
+
+            .why-card,
+            .benefit-card {
+                padding: 30px;
             }
         }
 
@@ -1348,6 +1529,14 @@
             .benefit-card {
                 padding: 25px;
             }
+
+            .form-container {
+                padding: 25px;
+            }
+
+            .who p {
+                font-size: 1.2rem;
+            }
         }
 
         /* Animation Classes */
@@ -1362,36 +1551,99 @@
             transform: translateY(0);
         }
 
-        /* Mobile header actions */
-        .mobile-header-actions {
-            display: none;
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        @media (max-width: 768px) {
-            .mobile-header-actions {
-                display: flex;
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--gray);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: var(--primary);
+            animation: loading 2s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-logo">
+            <img src="logo.png" alt="Ali Debo Logo" style="height: 50px;">
+            علي ديبو
+        </div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-content">
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
             </div>
 
             <div class="top-actions">
-                <div class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-sun toggle-icon sun-icon"></i>
-                    <i class="fas fa-moon toggle-icon moon-icon"></i>
-                    <div class="toggle-ball"></div>
-                </div>
+                <label class="theme-toggle">
+                    <input type="checkbox" id="themeToggleInput">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
 
                 <div class="language-switch">
                     <button id="languageToggle">
@@ -1409,11 +1661,11 @@
             <div class="logo-section">
                 <a href="#" class="logo">
                     <img src="logo.png" alt="Ali Debo Logo" style="height: 45px; margin-left: .5rem;">
-                    Ali Debo
+                    علي ديبو
                 </a>
             </div>
 
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links header-nav-links" id="navLinks">
                 <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
                 <li><a href="#benefits"><i class="fas fa-star"></i> ميزة الانضمام المبكر</a></li>
                 <li><a href="#who"><i class="fas fa-users"></i> من يمكنه الانضمام؟</a></li>
@@ -1427,38 +1679,29 @@
             </div>
 
             <div class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
+                <span class="hamburger"></span>
             </div>
         </div>
     </header>
 
     <!-- Sidebar for Mobile -->
     <div class="sidebar" id="sidebar">
-        <ul class="nav-links">
-            <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
-            <li><a href="#benefits"><i class="fas fa-star"></i> ميزة الانضمام المبكر</a></li>
-            <li><a href="#who"><i class="fas fa-users"></i> من يمكنه الانضمام؟</a></li>
-            <li><a href="#form"><i class="fas fa-edit"></i> سجل شركتك</a></li>
-        </ul>
 
-        <div class="sidebar-actions">
-            <div class="theme-toggle" id="sidebarThemeToggle">
-                <div class="toggle-ball"></div>
-            </div>
-
-            <div class="language-switch">
-                <button id="sidebarLanguageToggle">
-                    <i class="fas fa-globe"></i>
-                    <span>EN</span>
-                </button>
-            </div>
+        <div class="loading-logo" style="flex-direction: column;">
+            <img src="logo.png" alt="Ali Debo Logo" style="height: 70px;">
+            علي ديبو
         </div>
 
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="sidebar-actions">
+
+
+
+            <ul class="nav-links">
+                <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
+                <li><a href="#benefits"><i class="fas fa-star"></i> ميزة الانضمام المبكر</a></li>
+                <li><a href="#who"><i class="fas fa-users"></i> من يمكنه الانضمام؟</a></li>
+                <li><a href="#form"><i class="fas fa-edit"></i> سجل شركتك</a></li>
+            </ul>
         </div>
 
         <a href="#form" class="header-btn">
@@ -1468,22 +1711,25 @@
 
     <div class="overlay" id="overlay"></div>
 
-
-
     <!-- Hero Section -->
     <section class="hero">
-        <div class="grid-lines"></div>
+        <div class="particles" id="particles"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="fade-in"><span>عرّف بشركتك</span> وابدأ في بناء حضورك الرقمي من خلال علي ديبو</h1>
                     <p class="fade-in">نحن نبني منصة جديدة تعرض الشركات بأسلوب عصري، أنيق، وسهل الوصول. سواء كنت في
                         بداية الطريق أو لديك اسم في السوق، وجودك معنا هو خطوة ذكية نحو توسيع عملك وجذب عملاء جدد.</p>
-                    <a href="#form" class="btn fade-in">سجّل شركتك الآن مجانًا</a>
+                    <div class="fade-in" style="display: flex; gap: 15px; justify-content: center;">
+                        <a href="#form" class="btn">سجّل شركتك الآن مجانًا</a>
+                        <a href="#why" class="btn btn-outline">اكتشف المزيد</a>
+                    </div>
                 </div>
                 <div class="hero-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Business Presentation">
+                    <div class="hero-image-container">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Business Presentation">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1493,16 +1739,18 @@
     <section class="why" id="why">
         <div class="container">
             <h2 class="section-title fade-in">لماذا علي ديبو؟</h2>
-            <p class="fade-in">في عالم مزدحم بالمنصات، نحن نركّز على شيء واحد: أن نعرض شركتك بأفضل صورة ممكنة.</p>
+            <p class="fade-in" style="font-size: 1.2rem;">في عالم مزدحم بالمنصات، نحن نركّز على شيء واحد: أن نعرض شركتك
+                بأفضل صورة ممكنة.</p>
 
             <div class="why-grid">
                 <div class="why-card fade-in">
                     <h3><i class="fas fa-medal"></i> تميز معنا</h3>
                     <ul>
-                        <li>تصميم أنيق</li>
-                        <li>سهولة الاستخدام</li>
-                        <li>تحسين ظهورك في نتائج البحث</li>
+                        <li>تصميم أنيق يعكس هوية علامتك التجارية</li>
+                        <li>سهولة الاستخدام والتنقل للمستخدمين</li>
+                        <li>تحسين ظهورك في نتائج البحث المحلية</li>
                         <li>دعم مستمر لتطوير حضورك الرقمي</li>
+                        <li>إحصائيات مفصلة عن زوار صفحتك</li>
                     </ul>
                 </div>
 
@@ -1510,19 +1758,21 @@
                     <h3><i class="fas fa-chart-line"></i> فوائد الانضمام</h3>
                     <ul>
                         <li>زيادة الوصول للعملاء المستهدفين</li>
-                        <li>بناء سمعة رقمية قوية</li>
+                        <li>بناء سمعة رقمية قوية وموثوقة</li>
                         <li>عرض منتجاتك وخدماتك باحترافية</li>
                         <li>تحسين تصنيف شركتك في محركات البحث</li>
+                        <li>فرص جديدة للتعاون مع شركات أخرى</li>
                     </ul>
                 </div>
 
                 <div class="why-card fade-in">
                     <h3><i class="fas fa-gem"></i> ميزات فريدة</h3>
                     <ul>
-                        <li>صفحة تعريفية متكاملة</li>
-                        <li>إحصائيات زوار مفصلة</li>
-                        <li>نظام تقييمات ومراجعات</li>
-                        <li>أدوات تسويقية متقدمة</li>
+                        <li>صفحة تعريفية متكاملة قابلة للتخصيص</li>
+                        <li>نظام تقييمات ومراجعات موثوق</li>
+                        <li>أدوات تسويقية متقدمة للترويج</li>
+                        <li>إمكانية ربط حسابات التواصل الاجتماعي</li>
+                        <li>دعم متعدد اللغات للوصول لجمهور أوسع</li>
                     </ul>
                 </div>
             </div>
@@ -1533,7 +1783,8 @@
     <section class="benefits" id="benefits">
         <div class="container">
             <h2 class="section-title text-center fade-in">ميزة الانضمام المبكر</h2>
-            <p class="text-center fade-in">نُتيح الآن التسجيل مجانيًا بالكامل لأول مجموعة من الشركات قبل الإطلاق الرسمي.
+            <p class="text-center fade-in" style="font-size: 1.2rem;">نُتيح الآن التسجيل مجانيًا بالكامل لأول مجموعة من
+                الشركات قبل الإطلاق الرسمي.
             </p>
 
             <div class="benefits-grid">
@@ -1574,10 +1825,23 @@
     <!-- Who Section -->
     <section class="who" id="who">
         <div class="container">
-            <h2 class="section-title text-center fade-in">من يمكنه الانضمام؟</h2>
-            <p class="fade-in">أي شركة أو نشاط تجاري يرغب في تعزيز حضوره الرقمي. لا توجد متطلبات خاصة، ولا قيود على نوع
-                النشاط. فقط <span class="highlight">جودة</span>، <span class="highlight">احتراف</span>، واستعداد لل<span
-                    class="highlight">تميّز</span>.</p>
+            <div class="who-card fade-in">
+                <h2 class="section-title text-center fade-in">من يمكنه الانضمام؟</h2>
+                <p class="fade-in">أي شركة أو نشاط تجاري يرغب في تعزيز حضوره الرقمي. لا توجد متطلبات خاصة، ولا قيود على
+                    نوع
+                    النشاط. فقط <span class="highlight">جودة</span>، <span class="highlight">احتراف</span>، واستعداد
+                    لل<span class="highlight">تميّز</span>. سواء كنت:</p>
+                <ul style="margin-top: 20px; list-style: none;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                            style="color: white; margin-left: 10px;"></i> شركة ناشئة تبحث عن الظهور</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                            style="color: white; margin-left: 10px;"></i> مؤسسة راسخة تريد توسيع نطاقها</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
+                            style="color: white; margin-left: 10px;"></i> متجر إلكتروني يريد زيادة المبيعات</li>
+                    <li><i class="fas fa-check" style="color: white; margin-left: 10px;"></i> مزود خدمات يبحث عن عملاء
+                        جدد</li>
+                </ul>
+            </div>
         </div>
     </section>
 
@@ -1587,7 +1851,8 @@
             <h2 class="section-title text-center fade-in">سجل شركتك الآن</h2>
             <div class="form-container">
 
-                <p class="fade-in" style="margin-bottom: 1rem;">املأ النموذج التالي لتسجيل شركتك في دليل علي ديبو</p>
+                <p class="fade-in" style="margin-bottom: 1rem; font-size: 1.2rem;">املأ النموذج التالي لتسجيل شركتك في
+                    دليل علي ديبو واحصل على مزايا الانضمام المبكر</p>
 
                 <form id="registrationForm">
                     <div class="form-group fade-in">
@@ -1660,21 +1925,13 @@
         </div>
     </section>
 
-    <!-- Conclusion -->
-    <!-- <section class="conclusion">
-        <div class="container">
-            <h2 class="section-title text-center fade-in">رؤيتنا</h2>
-            <p class="fade-in">"علي ديبو" ليس مجرد فكرة، بل مشروع يُبنى بخطوات واثقة. نبدأ اليوم بمحتوى منظم، تصميم نظيف، وتجربة استخدام تليق بالشركات التي تطمح للتميّز.</p>
-            <p class="fade-in">نحن لا نطلب من الشركات أن تنضم... بل نفتح الباب لمن يرى في نفسه جاهزية للظهور باحتراف.</p>
-        </div>
-    </section> -->
-
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <div class="logo"><i class="fas fa-building"></i> علي <span>ديبو</span></div>
+                    <div class="logo"><img src="logo.png" alt="Ali Debo Logo" style="height: 45px; margin-left: .5rem;">
+                        علي <span>ديبو</span></div>
                     <p>دليل الشركات الرقمي الأول في المنطقة، نساعد الشركات على الظهور باحترافية وجذب عملاء جدد.</p>
                 </div>
 
@@ -1704,53 +1961,136 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script>
+        // Loading Screen
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 1500);
+        });
+
         // Theme Toggle
         const toggleTheme = () => {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            const body = document.body;
+            const themeToggleInput = document.getElementById('themeToggleInput');
+            const sidebarThemeToggle = document.getElementById('sidebarThemeToggle');
+
+            // Toggle dark mode
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            // Update toggle state
+            themeToggleInput.checked = isDarkMode;
+            if (sidebarThemeToggle) {
+                sidebarThemeToggle.checked = isDarkMode;
+            }
+
+            // Save preference
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         };
 
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-        document.getElementById('sidebarThemeToggle').addEventListener('click', toggleTheme);
+        // Initialize Theme
+        const initializeTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
 
-        // Apply saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
+            // Apply saved theme if exists
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggleInput').checked = true;
+                const sidebarToggle = document.getElementById('sidebarThemeToggle');
+                if (sidebarToggle) {
+                    sidebarToggle.checked = true;
+                }
+            }
+
+            // Make page visible
+            document.body.style.visibility = 'visible';
+        };
+
+        // Event Listeners for theme toggle
+        document.getElementById('themeToggleInput').addEventListener('change', toggleTheme);
+        document.getElementById('sidebarThemeToggle')?.addEventListener('change', toggleTheme);
+        document.addEventListener('DOMContentLoaded', initializeTheme);
 
         // Language Toggle
         const languageToggle = document.getElementById('languageToggle');
-        languageToggle.addEventListener('click', () => {
+        const sidebarLanguageToggle = document.getElementById('sidebarLanguageToggle');
+
+        const toggleLanguage = () => {
             const langSpan = languageToggle.querySelector('span');
             if (langSpan.textContent === 'EN') {
                 langSpan.textContent = 'AR';
                 // Here you would typically change the page language
-                alert('تم تغيير اللغة إلى العربية');
+                // alert('تم تغيير اللغة إلى العربية');
             } else {
                 langSpan.textContent = 'EN';
-                alert('Language changed to English');
+                // alert('Language changed to English');
             }
-        });
+        };
+
+        if (languageToggle) {
+            languageToggle.addEventListener('click', toggleLanguage);
+        }
+
+        if (sidebarLanguageToggle) {
+            sidebarLanguageToggle.addEventListener('click', toggleLanguage);
+        }
 
         // Form Submission
         const registrationForm = document.getElementById('registrationForm');
         const confirmationMessage = document.getElementById('confirmationMessage');
 
-        registrationForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            confirmationMessage.style.display = 'block';
-            registrationForm.reset();
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                confirmationMessage.style.display = 'block';
+                registrationForm.reset();
 
-            // Scroll to confirmation
-            setTimeout(() => {
-                window.scrollTo({
-                    top: confirmationMessage.offsetTop - 150,
-                    behavior: 'smooth'
-                });
-            }, 300);
-        });
+                // Scroll to confirmation
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: confirmationMessage.offsetTop - 150,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            });
+        }
+
+        // Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+
+                // Random animation duration between 10s and 20s
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
 
         // Scroll Animations
         const fadeElements = document.querySelectorAll('.fade-in');
@@ -1772,21 +2112,36 @@
 
         // Mobile Navigation Toggle
         const mobileToggle = document.getElementById('mobileToggle');
-        const navLinks = document.getElementById('navLinks');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
 
-        mobileToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        if (mobileToggle && sidebar && overlay) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
+            });
+
+            overlay.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
 
         // Header scroll effect
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
 
         // Smooth Scrolling for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1803,15 +2158,42 @@
                     });
 
                     // Close mobile menu if open
-                    navLinks.classList.remove('active');
+                    if (sidebar && sidebar.classList.contains('open')) {
+                        mobileToggle.classList.remove('active');
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
                 }
             });
         });
 
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        if (backToTopButton) {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
         // Initialize header
-        if (window.scrollY > 50) {
+        if (window.scrollY > 50 && header) {
             header.classList.add('scrolled');
         }
+
+        // Create particles after page loads
+        window.addEventListener('load', createParticles);
     </script>
 </body>
 
