@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Animated Triple Ads Gallery — Ultimate Creative</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* Global & Responsive Base */
+        :root {
+            --card-width: 300px;
+            --card-height: 420px;
+            --gap-size: 1.25rem;
+            --bg-color: #0f1720;
+            --text-color: #fff;
+            --hover-glow-color: #ff8c00;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Layout & Positioning */
+        .wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .gallery {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            flex-wrap: wrap;
+            gap: var(--gap-size);
+            /* flex-direction: column; */
+        }
+
+        .image-container {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.7);
+            background: linear-gradient(180deg, #111 0%, #0b0f14 100%);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: perspective(1000px) rotateX(2deg) scale(1.02);
+            box-shadow: 0 0 20px var(--hover-glow-color), 0 10px 40px rgba(2, 6, 23, 0.9);
+        }
+
+        .image-container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            display: block;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
+        }
+
+        .label {
+            position: absolute;
+            left: 0.75rem;
+            bottom: 0.75rem;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.65);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Controls Panel */
+        .controls {
+            position: fixed;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+        }
+
+        .controls button {
+            margin-left: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            border: 0;
+            background: #111;
+            color: var(--text-color);
+            cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: opacity 0.2s ease;
+        }
+
+        .controls button:hover {
+            opacity: .9;
+        }
+
+        .controls button .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .controls button[data-state="playing"] .icon-play {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        .controls button[data-state="paused"] .icon-pause {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        .small {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive Design: Mobile First Approach */
+        @media (max-width: 768px) {
+            .wrap {
+                padding: 1rem;
+            }
+            .gallery {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .image-container {
+        
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="gallery" id="gallery">
+            <div class="image-container" data-direction="right" data-name="left">
+                <img class="current" src="https://picsum.photos/id/1011/600/800" alt="Ad 1">
+                <img class="next" src="https://picsum.photos/id/1012/600/800" alt="Ad 1 Next">
+                <div class="label">Ad — Left</div>
+            </div>
+
+            <div class="image-container" data-direction="up" data-name="center">
+                <img class="current" src="https://picsum.photos/id/1013/600/800" alt="Ad 2">
+                <img class="next" src="https://picsum.photos/id/1014/600/800" alt="Ad 2 Next">
+                <div class="label">Ad — Center</div>
+            </div>
+
+            <div class="image-container" data-direction="left" data-name="right">
+                <img class="current" src="https://picsum.photos/id/1015/600/800" alt="Ad 3">
+                <img class="next" src="https://picsum.photos/id/1016/600/800" alt="Ad 3 Next">
+                <div class="label">Ad — Right</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <span class="small">Auto play</span>
+        <button id="btnToggle" data-state="playing" aria-label="Toggle autoplay">
+            <svg class="icon icon-play" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon icon-pause" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        // Select all image containers and the control button
+        const containers = Array.from(document.querySelectorAll('.image-container'));
+        const galleryEl = document.getElementById('gallery');
+        const btnToggle = document.getElementById('btnToggle');
+
+        // Animation options and configuration
+        const options = {
+            intervalMs: 3000,          // Time between each animation loop in milliseconds
+            animationDuration: 1.0,    // Duration of a single card animation in seconds
+            staggerDelay: 0.1,         // Stagger delay between each card in a loop
+        };
+
+        // State variables for the animation loop
+        let loopTimer = null;
+        let isPlaying = true;
+        let isIntersecting = false;
+
+        // Helper function to generate a random image URL (from picsum)
+        function randomPic() {
+            const seed = Math.floor(Math.random() * 10000);
+            return `https://picsum.photos/seed/${seed}/600/800`;
+        }
+
+        // Helper function to preload an image to avoid flickering
+        function preloadImage(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve();
+                img.onerror = () => resolve();
+                img.src = src;
+            });
+        }
+
+        // Helper function to position the 'next' image off-screen
+        function positionNextOffscreen(nextEl, dir) {
+            gsap.set(nextEl, { clearProps: "all" });
+            const positions = {
+                'left': { x: '100%', y: '0%' },
+                'right': { x: '-100%', y: '0%' },
+                'up': { x: '0%', y: '100%' },
+            };
+            gsap.set(nextEl, positions[dir] || { x: '0%', y: '0%' });
+            nextEl.style.opacity = 1;
+        }
+
+        // Main animation function for a single container
+        function animateContainer(container, delay = 0) {
+            return new Promise(async (resolve) => {
+                const dir = container.dataset.direction;
+                const current = container.querySelector('.current');
+                const next = container.querySelector('.next');
+
+                if (!isPlaying) { resolve(); return; }
+
+                await preloadImage(next.src);
+                positionNextOffscreen(next, dir);
+
+                const propsOut = {};
+                const propsIn = {};
+                if (dir === 'left') {
+                    propsOut.x = '-100%';
+                    propsIn.x = '0%';
+                } else if (dir === 'right') {
+                    propsOut.x = '100%';
+                    propsIn.x = '0%';
+                } else if (dir === 'up') {
+                    propsOut.y = '-100%';
+                    propsIn.y = '0%';
+                }
+
+                next.style.zIndex = 2;
+                current.style.zIndex = 1;
+
+                await new Promise(r => setTimeout(r, Math.round(delay * 1000)));
+
+                if (!isPlaying) { resolve(); return; }
+
+                // Animate 'current' image out with a slight scale down
+                gsap.to(current, { ...propsOut, scale: 0.95, duration: options.animationDuration, ease: "power2.inOut" });
+
+                // Animate 'next' image in with a slight scale up
+                gsap.to(next, {
+                    ...propsIn,
+                    scale: 1,
+                    duration: options.animationDuration,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        current.src = next.src;
+                        gsap.set(current, { x: 0, y: 0, scale: 1 });
+                        next.src = randomPic();
+                        positionNextOffscreen(next, dir);
+                        resolve();
+                    }
+                });
+            });
+        }
+
+        // Function to animate all containers in the gallery
+        async function animateAll() {
+            if (!isPlaying) return;
+            const promises = containers.map((c, idx) => animateContainer(c, idx * options.staggerDelay));
+            await Promise.all(promises);
+        }
+
+        // Function to start the animation loop using a recursive setTimeout
+        function startLoop() {
+            if (loopTimer) return;
+            async function tick() {
+                if (!isPlaying || !isIntersecting) { loopTimer = null; return; }
+                await animateAll();
+                loopTimer = setTimeout(tick, options.intervalMs);
+            }
+            tick();
+        }
+
+        // Function to stop the animation loop
+        function stopLoop() {
+            if (loopTimer) {
+                clearTimeout(loopTimer);
+                loopTimer = null;
+            }
+        }
+
+        // Function to toggle play/pause state
+        function togglePlayback(play) {
+            isPlaying = play;
+            btnToggle.dataset.state = isPlaying ? "playing" : "paused";
+            if (isPlaying && isIntersecting) {
+                startLoop();
+            } else {
+                stopLoop();
+            }
+        }
+
+        // Initial setup for all containers on page load
+        containers.forEach(c => {
+            const dir = c.dataset.direction;
+            const next = c.querySelector('.next');
+            positionNextOffscreen(next, dir);
+            if (!next.src || next.src.trim() === '') next.src = randomPic();
+            preloadImage(next.src);
+        });
+
+        // IntersectionObserver to control auto-play based on visibility
+        const observer = new IntersectionObserver(([entry]) => {
+            isIntersecting = entry.isIntersecting;
+            if (isIntersecting && isPlaying) {
+                startLoop();
+            } else {
+                stopLoop();
+            }
+        }, { threshold: 0.5 });
+        
+        observer.observe(galleryEl);
+
+        // Event listener for the play/pause toggle button
+        btnToggle.addEventListener('click', () => {
+            togglePlayback(!isPlaying);
+        });
+        
+        // Hover to pause logic:
+        galleryEl.addEventListener('mouseenter', () => {
+            if (isPlaying) {
+                stopLoop();
+                btnToggle.dataset.state = "paused";
+            }
+        });
+        galleryEl.addEventListener('mouseleave', () => {
+            if (isIntersecting && btnToggle.dataset.state === "paused") {
+                startLoop();
+                btnToggle.dataset.state = "playing";
+            }
+        });
+    </script>
+</body>
+</html>
