@@ -241,10 +241,10 @@ if (backToTopButton) {
     });
 
 }
-
 const containers = Array.from(document.querySelectorAll('.image-container'));
 const galleryEl = document.getElementById('gallery');
 
+const totalImages = 6; // عدد الصور
 
 // Initialize header
 if (window.scrollY > 50 && header) {
@@ -253,23 +253,44 @@ if (window.scrollY > 50 && header) {
 
 // Animation options and configuration
 const options = {
-    intervalMs: 3000,          // Time between each animation loop in milliseconds
-    animationDuration: 1.0,    // Duration of a single card animation in seconds
-    staggerDelay: 0.1,         // Stagger delay between each card in a loop
+    intervalMs: 3000,
+    animationDuration: 1.0,
+    staggerDelay: 0.3,
 };
 
-// State variables for the animation loop
 let loopTimer = null;
 let isPlaying = true;
 let isIntersecting = false;
 
-// Helper function to generate a random image URL (from picsum)
-function randomPic() {
-    const index = Math.floor(Math.random() * 6) + 1; // من 1 لـ 6
-    return `images/${index}.jpg`;
+// helper: ترجّع اسم الملف بس
+function filenameOf(src) {
+    return src.split("/").pop().split("?")[0];
 }
 
-// Helper function to preload an image to avoid flickering
+// **وظيفة جديدة**: تجمع كل الصور المتاحة وتختار منها عدد فريد يساوي عدد الكروت
+function getNewUniqueImageSources() {
+    const currentFiles = new Set(
+        containers.map(c => filenameOf(c.querySelector('.current')?.src))
+    );
+
+    let availableIndices = [];
+    for (let i = 1; i <= totalImages; i++) {
+        if (!currentFiles.has(`${i}.jpg`)) {
+            availableIndices.push(i);
+        }
+    }
+    
+    // بنعمل ترتيب عشوائي للصور المتاحة
+    for (let i = availableIndices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [availableIndices[i], availableIndices[j]] = [availableIndices[j], availableIndices[i]];
+    }
+
+    // بناخد أول عدد من الصور يساوي عدد الكروت
+    return availableIndices.slice(0, containers.length).map(idx => `images/${idx}.jpg`);
+}
+
+// preload image
 function preloadImage(src) {
     return new Promise((resolve) => {
         const img = new Image();
@@ -279,7 +300,7 @@ function preloadImage(src) {
     });
 }
 
-// Helper function to position the 'next' image off-screen
+// position next offscreen
 function positionNextOffscreen(nextEl, dir) {
     gsap.set(nextEl, { clearProps: "all" });
     const positions = {
@@ -291,7 +312,7 @@ function positionNextOffscreen(nextEl, dir) {
     nextEl.style.opacity = 1;
 }
 
-// Main animation function for a single container
+// main animation
 function animateContainer(container, delay = 0) {
     return new Promise(async (resolve) => {
         const dir = container.dataset.direction;
@@ -323,10 +344,8 @@ function animateContainer(container, delay = 0) {
 
         if (!isPlaying) { resolve(); return; }
 
-        // Animate 'current' image out with a slight scale down
         gsap.to(current, { ...propsOut, scale: 0.95, duration: options.animationDuration, ease: "power2.inOut" });
 
-        // Animate 'next' image in with a slight scale up
         gsap.to(next, {
             ...propsIn,
             scale: 1,
@@ -335,7 +354,8 @@ function animateContainer(container, delay = 0) {
             onComplete: () => {
                 current.src = next.src;
                 gsap.set(current, { x: 0, y: 0, scale: 1 });
-                next.src = randomPic();
+                // **تم حذف السطر اللي بيختار صورة عشوائية هنا**
+                // next.src = randomPicAvoidCurrents();
                 positionNextOffscreen(next, dir);
                 resolve();
             }
@@ -343,14 +363,24 @@ function animateContainer(container, delay = 0) {
     });
 }
 
-// Function to animate all containers in the gallery
+// **وظيفة animateAll معدلة**
 async function animateAll() {
     if (!isPlaying) return;
-    const promises = containers.map((c, idx) => animateContainer(c, idx * options.staggerDelay));
+    
+    // بنختار صور جديدة فريدة لكل الكروت قبل ما تبدأ الحركة
+    const newImageSources = getNewUniqueImageSources();
+
+    const promises = containers.map((c, idx) => {
+        const next = c.querySelector('.next');
+        // بنحط الصورة اللي تم اختيارها بشكل فريد
+        next.src = newImageSources[idx];
+        return animateContainer(c, idx * options.staggerDelay);
+    });
+    
     await Promise.all(promises);
 }
 
-// Function to start the animation loop using a recursive setTimeout
+// start loop
 function startLoop() {
     if (loopTimer) return;
     async function tick() {
@@ -361,7 +391,7 @@ function startLoop() {
     tick();
 }
 
-// Function to stop the animation loop
+// stop loop
 function stopLoop() {
     if (loopTimer) {
         clearTimeout(loopTimer);
@@ -369,16 +399,25 @@ function stopLoop() {
     }
 }
 
-// Initial setup for all containers on page load
-containers.forEach(c => {
-    const dir = c.dataset.direction;
-    const next = c.querySelector('.next');
-    positionNextOffscreen(next, dir);
-    if (!next.src || next.src.trim() === '') next.src = randomPic();
-    preloadImage(next.src);
-});
+// initial setup
+(function initImages() {
+    let available = Array.from({ length: totalImages }, (_, i) => i + 1);
+    containers.forEach(c => {
+        const idx = available.splice(Math.floor(Math.random() * available.length), 1)[0];
+        const current = c.querySelector('.current');
+        const next = c.querySelector('.next');
+        current.src = `images/${idx}.jpg`;
+        // **تم تعديل السطر ده عشان ياخد صورة جديدة وفريدة**
+        const nextAvailable = Array.from({ length: totalImages }, (_, i) => i + 1).filter(i => i !== idx);
+        const nextIdx = nextAvailable[Math.floor(Math.random() * nextAvailable.length)];
+        next.src = `images/${nextIdx}.jpg`;
+        
+        positionNextOffscreen(next, c.dataset.direction);
+        preloadImage(next.src);
+    });
+})();
 
-// IntersectionObserver to control auto-play based on visibility
+// observer
 const observerForAds = new IntersectionObserver(([entry]) => {
     isIntersecting = entry.isIntersecting;
     if (isIntersecting && isPlaying) {
@@ -389,7 +428,6 @@ const observerForAds = new IntersectionObserver(([entry]) => {
 }, { threshold: 0.5 });
 
 observerForAds.observe(galleryEl);
-
 
 // Create particles after page loads
 window.addEventListener('load', createParticles);
