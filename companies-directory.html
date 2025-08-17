@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>علي ديبو - دليل الشركات</title>
+  <meta name="description" content="دليل الشركات الرقمي من علي ديبو - اكتشف أفضل الشركات في مختلف المجالات" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="companies-directory.css" />
+  <link rel="shortcut icon" href="logo.webp" type="image/x-icon" />
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <!-- Social Links Section -->
+      <div class="social-links" aria-label="روابط الشبكات الاجتماعية">
+        <a href="https://www.facebook.com/share/1DDsn6rqQG/" target="_blank" aria-label="فيسبوك" class="facebook"><i
+            class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/co_Alidebo?t=NfuTRx3gMs7OQ3sGCmIJQw&s=08" target="_blank" aria-label="تويتر"
+          class="twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/co.alidebo?igsh=czR1NDh5c2lydjNt" target="_blank" aria-label="انستجرام"
+          class="instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <!-- Advertising Space #1 - Rotating Text Ads -->
+      <aside class="top-bar-ad" aria-label="إعلانات أعلى الصفحة">
+        <div class="ad-slide"><span>✨ إعلان: احصل على خصم 20% عند التسجيل المبكر!</span></div>
+        <div class="ad-slide"><span>🚀 شاهد كيف يمكن لشركتك الظهور في دليلنا</span></div>
+      </aside>
+
+      <!-- Theme/Language Actions -->
+      <div class="top-actions">
+        <button class="theme-toggle" aria-label="تبديل الثيم" aria-pressed="false">
+          <i class="fas fa-sun" aria-hidden="true"></i>
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <div class="language-switch">
+          <button id="languageToggle" aria-label="تبديل اللغة" aria-pressed="false">
+            <i class="fas fa-globe" aria-hidden="true"></i>
+            <span>EN</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="#" class="logo" aria-label="الصفحة الرئيسية">
+          <img src="logo.webp" alt="شعار علي ديبو" style="height: 45px; margin-left: .5rem;" />
+          <span>علي ديبو</span>
+        </a>
+      </div>
+
+      <nav aria-label="التنقل الرئيسي">
+        <ul class="nav-links header-nav-links" id="navLinks">
+          <li><a href="/index.html#why"><i class="fas fa-question-circle" aria-hidden="true"></i> لماذا علي ديبو؟</a>
+          </li>
+          <li><a href="/index.html#benefits"><i class="fas fa-star" aria-hidden="true"></i> ميزة الانضمام المبكر</a>
+          </li>
+          <li><a href="/index.html#who"><i class="fas fa-users" aria-hidden="true"></i> من يمكنه الانضمام؟</a></li>
+          <li><a href="/companies-directory.html"><i class="fas fa-building" aria-hidden="true"></i> دليل الشركات</a>
+          </li>
+
+          <li><a href="/index.html#form"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#form" class="header-btn" aria-label="ابدأ الآن">
+          <i class="fas fa-rocket" aria-hidden="true"></i> ابدأ معنا
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="فتح القائمة" aria-expanded="false"
+        aria-controls="sidebar">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar -->
+<aside class="sidebar" id="sidebar" aria-label="قائمة الجوال" aria-hidden="true">
+    <div class="loading-logo" style="flex-direction: column;">
+      <img src="logo.webp" alt="شعار علي ديبو" style="height: 70px;" />
+      <span>علي ديبو</span>
+    </div>
+
+    <div class="sidebar-actions">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html#why"><i class="fas fa-question-circle" aria-hidden="true"></i> لماذا علي ديبو؟</a></li>
+        <li><a href="/index.html#benefits"><i class="fas fa-star" aria-hidden="true"></i> ميزة الانضمام المبكر</a></li>
+        <li><a href="/index.html#who"><i class="fas fa-users" aria-hidden="true"></i> من يمكنه الانضمام؟</a></li>
+        <li><a href="/companies-directory.html"><i class="fas fa-building" aria-hidden="true"></i> دليل الشركات</a>
+        </li>
+
+        <li><a href="/index.html#form"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+      </ul>
+    </div>
+
+    <a href="#form" class="header-btn" aria-label="ابدأ الآن">
+      <i class="fas fa-rocket" aria-hidden="true"></i> ابدأ معنا
+    </a>
+  </aside>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+
+  <!-- ====================
+       MOBILE CTA (Floating)
+  ==================== -->
+  <div class="floating-btn-mobile" id="floatingBtnMobile">
+    <button class="start-btn" aria-label="ابدأ التسجيل الآن"
+      onclick="document.getElementById('form').scrollIntoView({ behavior: 'smooth' });">ابدأ معنا</button>
+  </div>
+  <!-- Main Content -->
+  <main>
+    <section class="companies-directory">
+      <div class="container">
+        <h1 class="section-title">دليل الشركات</h1>
+
+        <!-- Search and Filter Section -->
+        <!-- In the directory-controls section -->
+        <div class="directory-controls">
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث عن شركة أو فئة..." aria-label="بحث عن شركات">
+            <button id="searchButton" aria-label="تنفيذ البحث"><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-container">
+              <select id="categoryFilter" aria-label="تصفية حسب الفئة">
+                <option value="">جميع الفئات</option>
+                <option value="التجارة الإلكترونية">التجارة الإلكترونية</option>
+                <option value="التقنية">التقنية</option>
+                <option value="الخدمات">الخدمات</option>
+                <option value="المطاعم والوجبات">المطاعم والوجبات</option>
+                <option value="التجزئة">التجزئة</option>
+                <option value="أخرى">أخرى</option>
+              </select>
+            </div>
+
+            <div class="filter-container">
+              <select id="countryFilter" aria-label="تصفية حسب الدولة">
+                <!-- Options will be populated by JavaScript -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Companies List -->
+        <div class="companies-list" id="companiesList">
+          <!-- Companies will be loaded here dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-content">
+            <i class="fas fa-building" aria-hidden="true"></i>
+            <h3>لا توجد شركات متاحة حالياً</h3>
+            <p>كن أول من يضيف شركته إلى دليلنا المتميز!</p>
+            <a href="#" class="btn">سجل شركتك الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Company Modal -->
+  <div class="modal" id="companyModal">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModal" aria-label="إغلاق النافذة">&times;</button>
+      <div class="modal-header">
+        <h2 id="modalCompanyName">اسم الشركة</h2>
+      </div>
+      <div class="modal-body">
+        <div class="company-info">
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="modalCompanyLocation">المكان: غير محدد</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-tag"></i>
+            <span id="modalCompanyCategory">الفئة: غير محددة</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-globe"></i>
+            <a id="modalCompanyWebsite" href="#" target="_blank">زيارة الموقع</a>
+          </div>
+        </div>
+        <div class="company-description">
+          <h3>عن الشركة</h3>
+          <p id="modalCompanyDescription">لا يوجد وصف متاح حالياً.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div class="logo">
+            <img src="logo.webp" alt="شعار علي ديبو" style="height: 45px; margin-left: .5rem;" />
+            <span>علي <span>ديبو</span></span>
+          </div>
+          <p>دليل الشركات الرقمي الأول في المنطقة، نساعد الشركات على الظهور باحترافية وجذب عملاء جدد.</p>
+        </div>
+
+        <div class="footer-links">
+          <h3>روابط سريعة</h3>
+          <ul>
+            <li><a href="#"><i class="fas fa-home" aria-hidden="true"></i> الصفحة الرئيسية</a></li>
+            <li><a href="#"><i class="fas fa-building" aria-hidden="true"></i> دليل الشركات</a></li>
+            <li><a href="#"><i class="fas fa-question-circle" aria-hidden="true"></i> الأسئلة الشائعة</a></li>
+            <li><a href="#"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>اتصل بنا</h3>
+          <ul>
+            <li><i class="fas fa-envelope" aria-hidden="true"></i> aliDebo@gmail.com</li>
+            <li><i class="fas fa-phone" aria-hidden="true"></i> 0086-14739884047</li>
+            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> غوانغتشو، الصين</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2023 علي ديبو. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="companies-directory.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

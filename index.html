@@ -2,441 +2,494 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>علي ديبو - دليل الشركات الرقمي المتكامل</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="logo.webp" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- ====================
+       META & SEO
+  ==================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>علي ديبو - دليل الشركات الرقمي المتكامل</title>
 
+  <!-- Primary Meta -->
+  <meta name="description"
+    content="علي ديبو: دليل الشركات الرقمي. عرّف بشركتك وابدأ في بناء حضورك الرقمي وجذب عملاء جدد بسهولة." />
+  <meta name="keywords" content="علي ديبو, دليل شركات, تسجيل شركة, تسويق رقمي, شركات, اعمال, متجر إلكتروني" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta property="og:title" content="علي ديبو - دليل الشركات الرقمي المتكامل" />
+  <meta property="og:description" content="عرّف بشركتك وابدأ في بناء حضورك الرقمي على منصة علي ديبو." />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta property="og:url" content="https://example.com/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="علي ديبو - دليل الشركات الرقمي المتكامل" />
+  <meta name="twitter:description" content="عرّف بشركتك وابدأ في بناء حضورك الرقمي على منصة علي ديبو." />
+  <meta name="twitter:image" content="https://example.com/og-image.jpg" />
+
+  <!-- Preconnect & Performance Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="logo.webp" type="image/x-icon" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Libraries (deferred) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Structured Data (Organization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "علي ديبو",
+    "url": "https://example.com",
+    "logo": "https://example.com/logo.webp",
+    "sameAs": [
+      "https://www.facebook.com/share/1DDsn6rqQG/",
+      "https://www.instagram.com/co.alidebo?igsh=czR1NDh5c2lydjNt/",
+      "https://x.com/co_Alidebo?t=NfuTRx3gMs7OQ3sGCmIJQw&s=08"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <!-- ====================
+       MOBILE CTA (Floating)
+  ==================== -->
+  <div class="floating-btn-mobile" id="floatingBtnMobile">
+    <button class="start-btn" aria-label="ابدأ التسجيل الآن"
+      onclick="document.getElementById('form').scrollIntoView({ behavior: 'smooth' });">ابدأ معنا</button>
+  </div>
 
-    <div class="floating-btn-mobile" id="floatingBtnMobile">
-        <button class="start-btn" onclick="document.getElementById('form').scrollIntoView({ behavior: 'smooth' });">ابدأ
-            معنا</button>
+  <!-- ====================
+       LOADING SCREEN
+  ==================== -->
+  <div class="loading-screen" aria-hidden="true">
+    <div class="loading-logo">
+      <img src="logo.webp" alt="شعار علي ديبو" style="height: 50px;" />
+      <span>علي ديبو</span>
     </div>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-logo">
-            <img src="logo.webp" alt="Ali Debo Logo" style="height: 50px;">
-            علي ديبو
-        </div>
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
-        </div>
+    <div class="loading-bar" role="progressbar" aria-label="تحميل" aria-valuemin="0" aria-valuemax="100">
+      <div class="loading-progress"></div>
     </div>
+  </div>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="top-bar-content">
-            <!-- Social Links Section -->
-            <div class="social-links">
-                <a href="#" aria-label="Visit us on facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Visit us on twitter" class="twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Visit us on instagram" class="instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Visit us on linkedin" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+  <!-- ====================
+       TOP BAR
+  ==================== -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <!-- Social Links Section -->
+      <div class="social-links" aria-label="روابط الشبكات الاجتماعية">
+        <a href="https://www.facebook.com/share/1DDsn6rqQG/" target="_blank" aria-label="فيسبوك" class="facebook"><i
+            class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/co_Alidebo?t=NfuTRx3gMs7OQ3sGCmIJQw&s=08" target="_blank" aria-label="تويتر"
+          class="twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/co.alidebo?igsh=czR1NDh5c2lydjNt" target="_blank" aria-label="انستجرام"
+          class="instagram"><i class="fab fa-instagram"></i></a>
+      </div>
 
-            <!-- Advertising Space #1 - Rotating Text Ads -->
-            <div class="top-bar-ad">
-                <div class="ad-slide">
-                    <span>✨ إعلان: احصل على خصم 20% عند التسجيل المبكر!</span>
-                </div>
-                <div class="ad-slide">
-                    <span>🚀 شاهد كيف يمكن لشركتك الظهور في دليلنا</span>
-                </div>
-            </div>
+      <!-- Advertising Space #1 - Rotating Text Ads -->
+      <aside class="top-bar-ad" aria-label="إعلانات أعلى الصفحة">
+        <div class="ad-slide"><span>✨ إعلان: احصل على خصم 20% عند التسجيل المبكر!</span></div>
+        <div class="ad-slide"><span>🚀 شاهد كيف يمكن لشركتك الظهور في دليلنا</span></div>
+      </aside>
 
-            <!-- Theme/Language Actions -->
-            <div class="top-actions">
-                <button class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </button>
-                <div class="language-switch">
-                    <button id="languageToggle">
-                        <i class="fas fa-globe"></i>
-                        <span>EN</span>
-                    </button>
-                </div>
-            </div>
+      <!-- Theme/Language Actions -->
+      <div class="top-actions">
+        <button class="theme-toggle" aria-label="تبديل الثيم" aria-pressed="false">
+          <i class="fas fa-sun" aria-hidden="true"></i>
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <div class="language-switch">
+          <button id="languageToggle" aria-label="تبديل اللغة" aria-pressed="false">
+            <i class="fas fa-globe" aria-hidden="true"></i>
+            <span>EN</span>
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 
-
-    <!-- Enhanced Header -->
-    <header id="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <a href="#" class="logo">
-                    <img src="logo.webp" alt="Ali Debo Logo" style="height: 45px; margin-left: .5rem;">
-                    علي ديبو
-                </a>
-            </div>
-
-            <ul class="nav-links header-nav-links" id="navLinks">
-                <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
-                <li><a href="#benefits"><i class="fas fa-star"></i> ميزة الانضمام المبكر</a></li>
-                <li><a href="#who"><i class="fas fa-users"></i> من يمكنه الانضمام؟</a></li>
-                <li><a href="#form"><i class="fas fa-edit"></i> سجل شركتك</a></li>
-            </ul>
-
-            <div class="header-actions">
-                <a href="#form" class="header-btn">
-                    <i class="fas fa-rocket"></i> ابدأ معنا
-                </a>
-            </div>
-
-            <div class="mobile-toggle" id="mobileToggle">
-                <span class="hamburger"></span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Sidebar for Mobile -->
-    <div class="sidebar" id="sidebar">
-
-        <div class="loading-logo" style="flex-direction: column;">
-            <img src="logo.webp" alt="Ali Debo Logo" style="height: 70px;">
-            علي ديبو
-        </div>
-
-        <div class="sidebar-actions">
-
-
-
-            <ul class="nav-links">
-                <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
-                <li><a href="#benefits"><i class="fas fa-star"></i> ميزة الانضمام المبكر</a></li>
-                <li><a href="#who"><i class="fas fa-users"></i> من يمكنه الانضمام؟</a></li>
-                <li><a href="#form"><i class="fas fa-edit"></i> سجل شركتك</a></li>
-            </ul>
-        </div>
-
-        <a href="#form" class="header-btn">
-            <i class="fas fa-rocket"></i> ابدأ معنا
+  <!-- ====================
+       HEADER & NAVIGATION
+  ==================== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="#" class="logo" aria-label="الصفحة الرئيسية">
+          <img src="logo.webp" alt="شعار علي ديبو" style="height: 45px; margin-left: .5rem;" />
+          <span>علي ديبو</span>
         </a>
+      </div>
+
+      <nav aria-label="التنقل الرئيسي">
+        <ul class="nav-links header-nav-links" id="navLinks">
+          <li><a href="#why"><i class="fas fa-question-circle" aria-hidden="true"></i> لماذا علي ديبو؟</a></li>
+          <li><a href="#benefits"><i class="fas fa-star" aria-hidden="true"></i> ميزة الانضمام المبكر</a></li>
+          <li><a href="#who"><i class="fas fa-users" aria-hidden="true"></i> من يمكنه الانضمام؟</a></li>
+          <li><a href="/companies-directory.html"><i class="fas fa-building" aria-hidden="true"></i> دليل الشركات</a>
+          </li>
+
+          <li><a href="#form"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#form" class="header-btn" aria-label="ابدأ الآن">
+          <i class="fas fa-rocket" aria-hidden="true"></i> ابدأ معنا
+        </a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="فتح القائمة" aria-expanded="false"
+        aria-controls="sidebar">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====================
+       MOBILE SIDEBAR
+  ==================== -->
+  <aside class="sidebar" id="sidebar" aria-label="قائمة الجوال" aria-hidden="true">
+    <div class="loading-logo" style="flex-direction: column;">
+      <img src="logo.webp" alt="شعار علي ديبو" style="height: 70px;" />
+      <span>علي ديبو</span>
     </div>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="sidebar-actions">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html#why"><i class="fas fa-question-circle" aria-hidden="true"></i> لماذا علي ديبو؟</a></li>
+        <li><a href="/index.html#benefits"><i class="fas fa-star" aria-hidden="true"></i> ميزة الانضمام المبكر</a></li>
+        <li><a href="/index.html#who"><i class="fas fa-users" aria-hidden="true"></i> من يمكنه الانضمام؟</a></li>
+        <li><a href="/companies-directory.html"><i class="fas fa-building" aria-hidden="true"></i> دليل الشركات</a>
+        </li>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="particles" id="particles"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="fade-in"><span>عرّف بشركتك</span> وابدأ في بناء حضورك الرقمي من خلال علي ديبو</h1>
-                    <p class="fade-in">نحن نبني منصة جديدة تعرض الشركات بأسلوب عصري، أنيق، وسهل الوصول. سواء كنت في
-                        بداية الطريق أو لديك اسم في السوق، وجودك معنا هو خطوة ذكية نحو توسيع عملك وجذب عملاء جدد.</p>
-
-                    <div class="fade-in hero-actions" style="display: flex; gap: 15px; justify-content: center;">
-                        <a href="#form" class="btn">سجّل شركتك الآن مجانًا</a>
-                        <a href="#why" class="btn btn-outline">اكتشف المزيد</a>
-                    </div>
-
-                </div>
-                <div class="hero-image fade-in">
-                    <div class="hero-image-container">
-                        <img src="pexels-rdne-7414284.webp" alt="Home-photo">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Section -->
-    <section class="why" id="why">
-        <div class="container">
-            <h2 class="section-title fade-in">لماذا علي ديبو؟</h2>
-            <p class="fade-in" style="font-size: 1.2rem;">في عالم مزدحم بالمنصات، نحن نركّز على شيء واحد: أن نعرض شركتك
-                بأفضل صورة ممكنة.</p>
-
-            <div class="why-grid">
-                <div class="why-card fade-in">
-                    <h3><i class="fas fa-medal"></i> تميز معنا</h3>
-                    <ul>
-                        <li>تصميم أنيق يعكس هوية علامتك التجارية</li>
-                        <li>سهولة الاستخدام والتنقل للمستخدمين</li>
-                        <li>تحسين ظهورك في نتائج البحث المحلية</li>
-                        <li>دعم مستمر لتطوير حضورك الرقمي</li>
-                        <li>إحصائيات مفصلة عن زوار صفحتك</li>
-                    </ul>
-                </div>
-
-                <div class="why-card fade-in">
-                    <h3><i class="fas fa-chart-line"></i> فوائد الانضمام</h3>
-                    <ul>
-                        <li>زيادة الوصول للعملاء المستهدفين</li>
-                        <li>بناء سمعة رقمية قوية وموثوقة</li>
-                        <li>عرض منتجاتك وخدماتك باحترافية</li>
-                        <li>تحسين تصنيف شركتك في محركات البحث</li>
-                        <li>فرص جديدة للتعاون مع شركات أخرى</li>
-                    </ul>
-                </div>
-
-                <div class="why-card fade-in">
-                    <h3><i class="fas fa-gem"></i> ميزات فريدة</h3>
-                    <ul>
-                        <li>صفحة تعريفية متكاملة قابلة للتخصيص</li>
-                        <li>نظام تقييمات ومراجعات موثوق</li>
-                        <li>أدوات تسويقية متقدمة للترويج</li>
-                        <li>إمكانية ربط حسابات التواصل الاجتماعي</li>
-                        <li>دعم متعدد اللغات للوصول لجمهور أوسع</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ==================== -->
-    <!-- Advertising Space #2 - Mid-Page Video Ad -->
-    <!-- ==================== -->
-    <!-- <div class="mid-page-ad fade-in">
-        <div class="ad-container">
-            <video autoplay loop muted playsinline>
-                <source src="3209211-uhd_3840_2160_25fps.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="ad-overlay">
-                <h3>شركاؤنا في النجاح</h3>
-                <p>انضم إلى أكثر من 500 شركة معتمدة في دليلنا</p>
-                <a href="#form" class="btn btn-outline">انضم الآن</a>
-            </div>
-        </div>
-    </div> -->
-
-    <div class="wrap fade-in">
-        <div class="gallery" id="gallery">
-            <div class="image-container" data-direction="right" data-name="left">
-                <img class="current" src="images/1.jpg" alt="Ad 1">
-                <img class="next" src="images/4.jpg" alt="Ad 1 Next">
-            </div>
-
-            <div class="image-container" data-direction="up" data-name="center">
-                <img class="current" src="images/2.jpg" alt="Ad 2">
-                <img class="next" src="images/5.jpg" alt="Ad 2 Next">
-            </div>
-
-            <div class="image-container" data-direction="left" data-name="right">
-                <img class="current" src="images/3.jpg" alt="Ad 3">
-                <img class="next" src="images/6.jpg" alt="Ad 3 Next">
-            </div>
-        </div>
+        <li><a href="/index.html#form"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+      </ul>
     </div>
 
-    <!-- Enhanced Benefits Section -->
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <h2 class="section-title text-center fade-in">ميزة الانضمام المبكر</h2>
-            <p class="text-center fade-in" style="font-size: 1.2rem;">نُتيح الآن التسجيل مجانيًا بالكامل لأول مجموعة من
-                الشركات قبل الإطلاق الرسمي.
-            </p>
+    <a href="#form" class="header-btn" aria-label="ابدأ الآن">
+      <i class="fas fa-rocket" aria-hidden="true"></i> ابدأ معنا
+    </a>
+  </aside>
 
-            <div class="benefits-grid">
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3>صفحة تعريفية احترافية</h3>
-                    <p>صممنا لك صفحة تعريفية متكاملة تعرض شركتك بأفضل صورة مع كافة التفاصيل التي تهم عملائك.</p>
-                    <div class="benefit-tag">ميزة حصرية</div>
-                </div>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
 
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>أولوية في الظهور على المنصة</h3>
-                    <p>الشركات المسجلة مبكرًا تحصل على أفضل المواقع وأعلى التصنيفات في منصتنا.</p>
-                    <div class="benefit-tag">لمدة 6 أشهر</div>
-                </div>
+  <!-- ====================
+       MAIN CONTENT
+  ==================== -->
+  <main>
+    <!-- = Hero Section = -->
+    <section class="hero" aria-label="القسم الرئيسي">
+      <div class="particles" id="particles" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="fade-in"><span>عرّف بشركتك</span> وابدأ في بناء حضورك الرقمي من خلال علي ديبو</h1>
+            <p class="fade-in">نحن نبني منصة جديدة تعرض الشركات بأسلوب عصري، أنيق، وسهل الوصول. سواء كنت في بداية الطريق
+              أو لديك اسم في السوق، وجودك معنا هو خطوة ذكية نحو توسيع عملك وجذب عملاء جدد.</p>
 
-                <div class="benefit-card fade-in">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3>إمكانية الترويج المجاني لاحقًا</h3>
-                    <p>احصل على فرصة للترويج المجاني لمنتجاتك وخدماتك خلال الفترة الأولى بعد الإطلاق.</p>
-                    <div class="benefit-tag">لمدة شهرين</div>
-                </div>
+            <div class="fade-in hero-actions" style="display: flex; gap: 15px; justify-content: center;">
+              <a href="#form" class="btn" aria-label="سجل شركتك الآن">سجّل شركتك الآن مجانًا</a>
+              <a href="#why" class="btn btn-outline" aria-label="اكتشف المزيد عن المنصة">اكتشف المزيد</a>
             </div>
+          </div>
 
-            <div class="deadline fade-in">
-                <p><i class="fas fa-clock"></i> هذه المزايا متاحة لفترة محدودة قبل إطلاق الخطط المدفوعة لاحقًا</p>
+          <div class="hero-image fade-in">
+            <div class="hero-image-container">
+              <!-- Hero image kept non-lazy for better LCP -->
+              <img src="pexels-rdne-7414284.webp" alt="واجهة المنصة تعرض شركات" />
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Who Section -->
-    <section class="who" id="who">
-        <div class="container">
-            <div class="who-card fade-in">
-                <h2 class="section-title text-center fade-in">من يمكنه الانضمام؟</h2>
-                <p class="fade-in">أي شركة أو نشاط تجاري يرغب في تعزيز حضوره الرقمي. لا توجد متطلبات خاصة، ولا قيود على
-                    نوع
-                    النشاط. فقط <span class="highlight">جودة</span>، <span class="highlight">احتراف</span>، واستعداد
-                    لل<span class="highlight">تميّز</span>. سواء كنت:</p>
-                <ul style="margin-top: 20px; list-style: none;">
-                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                            style="color: white; margin-left: 10px;"></i> شركة ناشئة تبحث عن الظهور</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                            style="color: white; margin-left: 10px;"></i> مؤسسة راسخة تريد توسيع نطاقها</li>
-                    <li style="margin-bottom: 10px;"><i class="fas fa-check"
-                            style="color: white; margin-left: 10px;"></i> متجر إلكتروني يريد زيادة المبيعات</li>
-                    <li><i class="fas fa-check" style="color: white; margin-left: 10px;"></i> مزود خدمات يبحث عن عملاء
-                        جدد</li>
-                </ul>
-            </div>
+    <!-- = Why Section = -->
+    <section class="why" id="why" aria-label="لماذا علي ديبو؟">
+      <div class="container">
+        <h2 class="section-title fade-in">لماذا علي ديبو؟</h2>
+        <p class="fade-in" style="font-size: 1.2rem;">في عالم مزدحم بالمنصات، نحن نركّز على شيء واحد: أن نعرض شركتك
+          بأفضل صورة ممكنة.</p>
+
+        <div class="why-grid">
+          <div class="why-card fade-in">
+            <h3><i class="fas fa-medal" aria-hidden="true"></i> تميز معنا</h3>
+            <ul>
+              <li>تصميم أنيق يعكس هوية علامتك التجارية</li>
+              <li>سهولة الاستخدام والتنقل للمستخدمين</li>
+              <li>تحسين ظهورك في نتائج البحث المحلية</li>
+              <li>دعم مستمر لتطوير حضورك الرقمي</li>
+              <li>إحصائيات مفصلة عن زوار صفحتك</li>
+            </ul>
+          </div>
+
+          <div class="why-card fade-in">
+            <h3><i class="fas fa-chart-line" aria-hidden="true"></i> فوائد الانضمام</h3>
+            <ul>
+              <li>زيادة الوصول للعملاء المستهدفين</li>
+              <li>بناء سمعة رقمية قوية وموثوقة</li>
+              <li>عرض منتجاتك وخدماتك باحترافية</li>
+              <li>تحسين تصنيف شركتك في محركات البحث</li>
+              <li>فرص جديدة للتعاون مع شركات أخرى</li>
+            </ul>
+          </div>
+
+          <div class="why-card fade-in">
+            <h3><i class="fas fa-gem" aria-hidden="true"></i> ميزات فريدة</h3>
+            <ul>
+              <li>صفحة تعريفية متكاملة قابلة للتخصيص</li>
+              <li>نظام تقييمات ومراجعات موثوق</li>
+              <li>أدوات تسويقية متقدمة للترويج</li>
+              <li>إمكانية ربط حسابات التواصل الاجتماعي</li>
+              <li>دعم متعدد اللغات للوصول لجمهور أوسع</li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- ====================
+         Advertising Space #2 - Gallery
+    ==================== -->
+    <aside class="wrap fade-in" aria-label="معرض إعلاني">
+      <div class="background-circle right" aria-hidden="true"></div>
+      <div class="background-circle left" aria-hidden="true"></div>
 
-    <section class="ad">
-        <div class="ad-container">
-            <img src="ui-ux-representations-with-smartphone.webp" alt="Ali Debo App" class="ad-image">
-            <div class="ad-text">
-                <h2>حمّل تطبيق علي ديبو الآن!</h2>
-                <p>استكشف آلاف الشركات والمنتجات، وقارن الأسعار بسهولة، وتواصل مباشرة مع البائعين.</p>
-                <a href="#" class="ad-btn">جرّب مجانًا</a>
-            </div>
+      <div class="gallery" id="gallery">
+        <div class="image-container" data-direction="right" data-name="left">
+          <img class="current" src="images/1.webp" alt="إعلان خصومات للشركات الجديدة" loading="lazy" />
+          <img class="next" src="images/4.webp" alt="حملة تعريفية بالمنصة" loading="lazy" />
         </div>
+
+        <div class="image-container" data-direction="up" data-name="center">
+          <img class="current" src="images/2.webp" alt="عرض ترحيبي للتسجيل" loading="lazy" />
+          <img class="next" src="images/5.webp" alt="انضم لشركائنا في النجاح" loading="lazy" />
+        </div>
+
+        <div class="image-container" data-direction="left" data-name="right">
+          <img class="current" src="images/3.webp" alt="واجهة تطبيق علي ديبو" loading="lazy" />
+          <img class="next" src="images/6.webp" alt="مزايا الانضمام المبكر" loading="lazy" />
+        </div>
+      </div>
+    </aside>
+
+    <!-- = Benefits Section = -->
+    <section class="benefits" id="benefits" aria-label="ميزة الانضمام المبكر">
+      <div class="container">
+        <h2 class="section-title text-center fade-in">ميزة الانضمام المبكر</h2>
+        <p class="text-center fade-in" style="font-size: 1.2rem;">نُتيح الآن التسجيل مجانيًا بالكامل لأول مجموعة من
+          الشركات قبل الإطلاق الرسمي.</p>
+
+        <div class="benefits-grid">
+          <div class="benefit-card fade-in">
+            <div class="benefit-icon"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
+            <h3>صفحة تعريفية احترافية</h3>
+            <p>صممنا لك صفحة تعريفية متكاملة تعرض شركتك بأفضل صورة مع كافة التفاصيل التي تهم عملائك.</p>
+            <div class="benefit-tag">ميزة حصرية</div>
+          </div>
+
+          <div class="benefit-card fade-in">
+            <div class="benefit-icon"><i class="fas fa-search" aria-hidden="true"></i></div>
+            <h3>أولوية في الظهور على المنصة</h3>
+            <p>الشركات المسجلة مبكرًا تحصل على أفضل المواقع وأعلى التصنيفات في منصتنا.</p>
+            <div class="benefit-tag">لمدة 6 أشهر</div>
+          </div>
+
+          <div class="benefit-card fade-in">
+            <div class="benefit-icon"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
+            <h3>إمكانية الترويج المجاني لاحقًا</h3>
+            <p>احصل على فرصة للترويج المجاني لمنتجاتك وخدماتك خلال الفترة الأولى بعد الإطلاق.</p>
+            <div class="benefit-tag">لمدة شهرين</div>
+          </div>
+        </div>
+
+        <div class="deadline fade-in">
+          <p><i class="fas fa-clock" aria-hidden="true"></i> هذه المزايا متاحة لفترة محدودة قبل إطلاق الخطط المدفوعة
+            لاحقًا</p>
+        </div>
+      </div>
     </section>
 
-
-    <!-- Enhanced Form Section -->
-    <section class="form-section" id="form">
-        <div class="container">
-            <h2 class="section-title text-center fade-in">سجل شركتك الآن</h2>
-            <div class="form-container">
-
-                <p class="fade-in" style="margin-bottom: 1rem; font-size: 1.2rem;">املأ النموذج التالي لتسجيل شركتك في
-                    دليل علي ديبو واحصل على مزايا الانضمام المبكر</p>
-
-                <form id="registrationForm">
-                    <div class="form-group fade-in">
-                        <label for="companyName"><i class="fas fa-building"></i> اسم الشركة *</label>
-                        <input type="text" id="companyName" required>
-                    </div>
-
-                    <div class="form-group fade-in">
-                        <label for="website"><i class="fas fa-globe"></i> رابط الموقع/صفحة التواصل *</label>
-                        <input type="url" id="website" required>
-                    </div>
-
-                    <div class="form-group fade-in">
-                        <label for="contact"><i class="fas fa-phone-alt"></i> وسيلة تواصل *</label>
-                        <input type="text" id="contact" required placeholder="مثال: هاتف، واتساب، إيميل">
-                    </div>
-
-                    <div class="form-group fade-in">
-                        <label for="category"><i class="fas fa-tag"></i> اختيار فئة *</label>
-                        <select id="category" required>
-                            <option value="">اختر فئة شركتك</option>
-                            <option value="ecommerce">التجارة الإلكترونية</option>
-                            <option value="services">الخدمات</option>
-                            <option value="technology">التقنية</option>
-                            <option value="food">المطاعم والوجبات</option>
-                            <option value="retail">التجزئة</option>
-                            <option value="other">أخرى</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group fade-in">
-                        <label><i class="fas fa-image"></i> رفع صورة أو شعار (اختياري)</label>
-                        <div class="upload-container">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <div>اسحب وأسقط الصورة هنا أو انقر للاختيار</div>
-                            <div class="upload-hint">JPG, PNG بحد أقصى 2MB</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group text-center fade-in">
-                        <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> سجّل الآن وابدأ
-                            الظهور</button>
-                    </div>
-
-                    <div class="form-footer fade-in">
-                        <div>
-                            <input type="checkbox" id="terms" required>
-                            <label for="terms">أوافق على <a href="#">الشروط والأحكام</a> و<a href="#">سياسة
-                                    الخصوصية</a></label>
-                        </div>
-                    </div>
-                </form>
-                <div id="confirmationMessage"
-                    style="display: none; text-align: center; padding: 30px; background: rgba(76, 175, 80, 0.1); border-radius: var(--radius); margin-top: 30px; color: #4CAF50; border: 2px dashed #4CAF50;">
-                    <h3><i class="fas fa-check-circle"></i> تم التسجيل بنجاح!</h3>
-                    <p>شكرًا لتسجيل شركتك في علي ديبو. سنتواصل معك قريبًا.</p>
-                </div>
-            </div>
+    <!-- = Who Section = -->
+    <section class="who" id="who" aria-label="من يمكنه الانضمام؟">
+      <div class="container">
+        <div class="who-card fade-in">
+          <h2 class="section-title text-center fade-in">من يمكنه الانضمام؟</h2>
+          <p class="fade-in">أي شركة أو نشاط تجاري يرغب في تعزيز حضوره الرقمي. لا توجد متطلبات خاصة، ولا قيود على نوع
+            النشاط. فقط <span class="highlight">جودة</span>، <span class="highlight">احتراف</span>، واستعداد لل<span
+              class="highlight">تميّز</span>. سواء كنت:</p>
+          <ul style="margin-top: 20px; list-style: none;">
+            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: white; margin-left: 10px;"
+                aria-hidden="true"></i> شركة ناشئة تبحث عن الظهور</li>
+            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: white; margin-left: 10px;"
+                aria-hidden="true"></i> مؤسسة راسخة تريد توسيع نطاقها</li>
+            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: white; margin-left: 10px;"
+                aria-hidden="true"></i> متجر إلكتروني يريد زيادة المبيعات</li>
+            <li><i class="fas fa-check" style="color: white; margin-left: 10px;" aria-hidden="true"></i> مزود خدمات يبحث
+              عن عملاء جدد</li>
+          </ul>
         </div>
+      </div>
     </section>
 
-    <!-- Ad Banners -->
-    <section class="ad-banners">
-        <div class="container">
-            <h2 class="fade-in">مساحة للإعلانات المستقبلية</h2>
-            <p class="fade-in">هذا القسم مخصص لعرض البنرات الإعلانية بعد الإطلاق الرسمي للمنصة</p>
-            <div class="banner-placeholder fade-in">
-                <i class="fas fa-ad"></i> مساحة إعلانية
-            </div>
+    <!-- = Promo Ad Section = -->
+    <section class="ad fade-in" aria-label="إعلان التطبيق">
+      <div class="ad-container download-app">
+        <img src="ui-ux-representations-with-smartphone.webp" alt="تطبيق علي ديبو على الهاتف" class="ad-image" />
+        <div class="ad-text">
+          <h2>حمّل تطبيق علي ديبو الآن!</h2>
+          <p>استكشف آلاف الشركات والمنتجات، وقارن الأسعار بسهولة، وتواصل مباشرة مع البائعين.</p>
+          <a href="#" class="ad-btn" aria-label="جرّب التطبيق">جرّب مجانًا</a>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo"><img src="logo.webp" alt="Ali Debo Logo"
-                            style="height: 45px; margin-left: .5rem;">
-                        علي <span>ديبو</span></div>
-                    <p>دليل الشركات الرقمي الأول في المنطقة، نساعد الشركات على الظهور باحترافية وجذب عملاء جدد.</p>
-                </div>
+    <!-- = Registration Form Section = -->
+    <section class="form-section" id="form" aria-label="نموذج تسجيل الشركة">
+      <div class="container">
+        <h2 class="section-title text-center fade-in">سجل شركتك الآن</h2>
+        <div class="form-container">
+          <p class="fade-in" style="margin-bottom: 1rem; font-size: 1.2rem;">املأ النموذج التالي لتسجيل شركتك في دليل
+            علي ديبو واحصل على مزايا الانضمام المبكر</p>
 
-                <div class="footer-links">
-                    <h3>روابط سريعة</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
-                        <li><a href="#why"><i class="fas fa-question-circle"></i> لماذا علي ديبو؟</a></li>
-                        <li><a href="#benefits"><i class="fas fa-star"></i> مزايا الانضمام</a></li>
-                        <li><a href="#form"><i class="fas fa-edit"></i> سجل شركتك</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h3>اتصل بنا</h3>
-                    <ul>
-
-                        <li><i class="fas fa-envelope"></i>aliDebo@gmail.com</li>
-                        <li><i class="fas fa-phone"></i>0086-14739884047</li>
-                        <li><i class="fas fa-address-card"></i>510080</li>
-                        <li><i class="fas fa-map-marker-alt"></i>No. 40, TongYa nan, TongDe Garden, XiCha Road, Baiyun
-                            District, GuangZhou of CHINA</li>
-                    </ul>
-                </div>
+          <form id="registrationForm">
+            <div class="form-group fade-in">
+              <label for="companyName"><i class="fas fa-building" aria-hidden="true"></i> اسم الشركة *</label>
+              <input type="text" id="companyName" name="companyName" required />
             </div>
 
-            <div class="copyright">
-                <p>© 2023 علي ديبو. جميع الحقوق محفوظة.</p>
+            <div class="form-group fade-in">
+              <label for="website"><i class="fas fa-globe" aria-hidden="true"></i> رابط الموقع/صفحة التواصل *</label>
+              <input type="url" id="website" name="website" required />
             </div>
+
+            <div class="form-group fade-in">
+              <label for="contact"><i class="fas fa-phone-alt" aria-hidden="true"></i> وسيلة تواصل *</label>
+              <input type="text" id="contact" name="contact" required placeholder="مثال: هاتف، واتساب، إيميل" />
+            </div>
+
+            <div class="form-group fade-in">
+              <label for="category"><i class="fas fa-tag" aria-hidden="true"></i> اختيار فئة *</label>
+              <select id="category" name="category" required>
+                <option value="">اختر فئة شركتك</option>
+                <option value="ecommerce">التجارة الإلكترونية</option>
+                <option value="services">الخدمات</option>
+                <option value="technology">التقنية</option>
+                <option value="food">المطاعم والوجبات</option>
+                <option value="retail">التجزئة</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+
+            <div class="form-group fade-in">
+              <label><i class="fas fa-image" aria-hidden="true"></i> رفع صورة أو شعار (اختياري)</label>
+              <div class="upload-container" role="button" tabindex="0" aria-label="رفع صورة أو شعار">
+                <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                <div>اسحب وأسقط الصورة هنا أو انقر للاختيار</div>
+                <div class="upload-hint">JPG, PNG بحد أقصى 2MB</div>
+              </div>
+            </div>
+
+            <div class="form-group text-center fade-in">
+              <button type="submit" class="btn" aria-label="إرسال التسجيل"><i class="fas fa-paper-plane"
+                  aria-hidden="true"></i> سجّل الآن وابدأ الظهور</button>
+            </div>
+
+            <div class="form-footer fade-in">
+              <div>
+                <input type="checkbox" id="terms" required />
+                <label for="terms">أوافق على <a href="#">الشروط والأحكام</a> و<a href="#">سياسة الخصوصية</a></label>
+              </div>
+            </div>
+          </form>
+
+          <div id="confirmationMessage"
+            style="display: none; text-align: center; padding: 30px; background: rgba(76, 175, 80, 0.1); border-radius: var(--radius); margin-top: 30px; color: #4CAF50; border: 2px dashed #4CAF50;">
+            <h3><i class="fas fa-check-circle" aria-hidden="true"></i> تم التسجيل بنجاح!</h3>
+            <p>شكرًا لتسجيل شركتك في علي ديبو. سنتواصل معك قريبًا.</p>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
+    <!-- = Future Ad Banners = -->
+    <section class="ad-banners" aria-label="مساحات إعلانية مستقبلية">
+      <div class="container">
+        <h2 class="fade-in">مساحة للإعلانات المستقبلية</h2>
+        <p class="fade-in">هذا القسم مخصص لعرض البنرات الإعلانية بعد الإطلاق الرسمي للمنصة</p>
+        <div class="banner-placeholder fade-in"><i class="fas fa-ad" aria-hidden="true"></i> مساحة إعلانية</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================
+       FOOTER
+  ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div class="logo">
+            <img src="logo.webp" alt="شعار علي ديبو" style="height: 45px; margin-left: .5rem;" />
+            <span>علي <span>ديبو</span></span>
+          </div>
+          <p>دليل الشركات الرقمي الأول في المنطقة، نساعد الشركات على الظهور باحترافية وجذب عملاء جدد.</p>
+        </div>
+
+        <div class="footer-links">
+          <h3>روابط سريعة</h3>
+          <ul>
+            <li><a href="#"><i class="fas fa-home" aria-hidden="true"></i> الصفحة الرئيسية</a></li>
+            <li><a href="#why"><i class="fas fa-question-circle" aria-hidden="true"></i> لماذا علي ديبو؟</a></li>
+            <li><a href="#benefits"><i class="fas fa-star" aria-hidden="true"></i> مزايا الانضمام</a></li>
+            <li><a href="#form"><i class="fas fa-edit" aria-hidden="true"></i> سجل شركتك</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>اتصل بنا</h3>
+          <ul>
+            <li><i class="fas fa-envelope" aria-hidden="true"></i> aliDebo@gmail.com</li>
+            <li><i class="fas fa-phone" aria-hidden="true"></i> 0086-14739884047</li>
+            <li><i class="fas fa-address-card" aria-hidden="true"></i> 510080</li>
+            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> No. 40, TongYa nan, TongDe Garden, XiCha Road,
+              Baiyun District, GuangZhou of CHINA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2023 علي ديبو. جميع الحقوق محفوظة.</p>
+      </div>
     </div>
-    <script src="main.js" defer></script>
+  </footer>
+
+  <!-- ====================
+       UTILITIES
+  ==================== -->
+  <button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Main Script (deferred) -->
+  <script defer src="main.js"></script>
 </body>
 
 </html>
